@@ -1,4 +1,5 @@
 .bak
 vendor/
 *.lock
-src/data/
+src/dev/data/
+/.vs

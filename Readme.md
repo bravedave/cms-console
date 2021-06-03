@@ -1,74 +1,32 @@
-# MVP - Minimum Viable Product
+# Connect to a Console database
 
-> _For PHP using composer initiated AutoLoad (PSR-4)_
+## Requires MSODBC
 
-In deployment PHP is easily maintained using Composer. Composer handles distribution and updating.
+[Install the Microsoft ODBC driver for SQL Server (Linux)](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15)
 
-This simple agnostic example is extended using a _Markdown Parser_.
-
-## What can I do with this ?
-
-> _Easily extend the environment - and to publish the extension for use in this and any PSR-4 enviroment - See example at <https://github.com/bravedave/pages>_
-
-### Install (Windows 10)
-
-1. Install Pre-Requisits
-   1. Install PHP : <http://windows.php.net/download/>
-      * Install the non threadsafe binary
-        * Test by running php -v from the command prompt
-          * If required install the VC++ runtime available from the php > download page
-        * by default there is no php.ini (required)
-          * copy php.ini-production to php.ini
-   2. Install Git : <https://git-scm.com/>
-      * Install the *Git Bash Here* option
-   3. Install Composer : <https://getcomposer.org/>
-
-2.Setup a new project
+* Install pear, php-dev and a compiler
 
 ```bash
-composer create-project bravedave/mvp <my-project> @dev
+# Alpine linux
+apk add php7-pear php7-dev
+# or
+apk add php8-pear php8-dev
+# and a compiler
+apk add make g++ unixodbc-dev
 ```
 
-3.Install dependencies &amp; run
+* Install PHP Driver
+  * [Microsoft Drivers for PHP for Microsoft SQL Server](https://github.com/microsoft/msphpsql)
 
 ```bash
-cd <my-project>
-composer update
-run.cmd
+# Alpine linux
+pecl install sqlsrv-5.9.0
 ```
 
-> ... the result is visible at <http://localhost/>
-
-### Extend with _erusev/parsedown_
-
-* Install Extension &amp; run
+also install into php
 
 ```bash
-composer require erusev/parsedown
-run.cmd
+echo extension=sqlsrv.so >>/etc/php7/conf.d/00_sqlsrv.ini
+# or
+echo extension=sqlsrv.so >>/etc/php8/conf.d/00_sqlsrv.ini
 ```
-
-* remove Extension
-
-```bash
-composer remove erusev/parsedown
-```
-
-### Extend with bravedave/pages
-
-* Install Extension &amp; run
-
-```bash
-composer require bravedave/pages
-run.cmd
-```
-
-* remove Extension
-
-```bash
-composer remove bravedave/pages
-```
-
-### more
-
-> Look at _src/app/launcher.php_ ...

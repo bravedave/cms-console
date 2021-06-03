@@ -1,6 +1,6 @@
 {
-    "name": "bravedave/mvp",
-    "description": "Minimum Viable Product",
+    "name": "bravedave/cms-console",
+    "description": "CMS Console Access",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
@@ -10,16 +10,27 @@
         }
     ],
     "repositories": [
-        { "type": "git", "url": "https://github.com/bravedave/dvc" }
+        {
+            "type": "git",
+            "url": "https://github.com/bravedave/dvc"
+        }
     ],
     "require": {
+        "ext-sqlsrv": "*",
+        "bravedave/dvc": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "cms\\console\\": "src/console/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "": "src/app/"
-
+            "": "src/dev/app/"
         }
-
+    },
+    "scripts": {
+        "post-update-cmd": "cms\\console\\postUpdate::upgrade"
     }
 
 }

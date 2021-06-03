@@ -10,6 +10,8 @@
 
 namespace cms\console;
 
+use strings;
+
 class creditors extends \Controller {
 	protected $label = config::label_creditors;
   protected $viewPath = __DIR__ . '/views/';

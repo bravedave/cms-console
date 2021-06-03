@@ -1,5 +1,12 @@
 # Connect to a Console database
 
+## Add to application
+
+```bash
+composer config repositories.bravedave-cms-console git https://github.com/bravedave/cms-console
+composer require bravedave/cms-console
+```
+
 ## Requires MSODBC
 
 [Install the Microsoft ODBC driver for SQL Server (Linux)](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15)

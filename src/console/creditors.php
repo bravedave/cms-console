@@ -25,6 +25,7 @@ class creditors extends \Controller {
 
     // 'searchFocus' => false,
     $this->render([
+      'title' => $this->title = $this->label,
       'primary' => 'creditors',
       'secondary' => 'index',
       'data' => (object)[

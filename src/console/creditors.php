@@ -16,13 +16,19 @@ class creditors extends \Controller {
 
   protected function _index() {
     $this->data = (object)[
-      'creditors' => db::creditors()
+      'creditors' => db::creditors(),
+      'pageUrl' => strings::url( $this->route)
 
     ];
 
+    // 'searchFocus' => false,
     $this->render([
       'primary' => 'creditors',
-      'secondary' => 'index'
+      'secondary' => 'index',
+      'data' => (object)[
+        'pageUrl' => $this->data->pageUrl
+
+      ]
 
     ]);
 

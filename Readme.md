@@ -3,7 +3,7 @@
 ## Add to application
 
 ```bash
-composer config repositories.bravedave-cms-console git https://github.com/bravedave/cms-console
+composer config repositories.cms-console git https://github.com/bravedave/cms-console
 composer require bravedave/cms-console
 ```
 

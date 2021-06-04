@@ -18,10 +18,10 @@
         <td rowspan="2" class="align-bottom">#</td>
         <td rowspan="2" class="align-bottom">Reference</td>
         <td rowspan="2" class="align-bottom">FileAs</td>
+        <td rowspan="2" class="align-bottom">Name</td>
         <td rowspan="2" class="align-bottom">Mobile</td>
         <td rowspan="2" class="align-bottom">Email</td>
         <td rowspan="2" class="align-bottom">ABN</td>
-        <td rowspan="2" class="align-bottom">Categories</td>
         <td rowspan="2" class="align-bottom">BPay</td>
         <td class="text-center" colspan="2">Dissection</td>
 
@@ -36,18 +36,25 @@
     </thead>
 
     <tbody>
-    <?php while ( $dto = $this->data->creditors->dto()) { ?>
+    <?php while ( $dto = $this->data->creditors->dto()) {
+      $name = [];
+      if ( $dto->First) $a[] = $dto->First;
+      if ( $dto->Middle) $a[] = $dto->Middle;
+      if ( $dto->Last) $a[] = $dto->Last;
+
+      ?>
+
       <tr>
         <td line-number></td>
         <td><?= $dto->Reference ?></td>
         <td><?= $dto->FileAs ?></td>
+        <td><?= $name ? implode( ' ', $name) : $dto->Salutation ?></td>
         <td><?= $dto->Mobile ?></td>
         <td><?= $dto->Email ?></td>
         <td><?= $dto->ABN ?></td>
-        <td><?= $dto->Categories ?></td>
         <td><?= $dto->BPAYBillerCode ?></td>
-        <td><?= $dto->Disection_FileAs ?></td>
-        <td><?= $dto->Disection_Refer ?></td>
+        <td><?= $dto->Dissection_FileAs ?></td>
+        <td><?= $dto->Dissection_Refer ?></td>
 
       </tr>
 

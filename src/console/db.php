@@ -79,23 +79,22 @@ class db {
 
 			SELECT
       c.ID,
-      c.FileAs,
       c.Reference,
+      c.FileAs,
       c.Created,
       c.Modified,
       c.Notes,
-      c.Categories,
       c.ABN,
       c.BPAYBillerCode,
       c.DissectionID
 			INTO #TEMP
 			FROM
 				Creditors c
-				WHERE NOT c.Inactive = 1 AND NOT c.Deleted = 1;
+				WHERE NOT FileAs = \'\' AND NOT c.Inactive = 1 AND NOT c.Deleted = 1;
 
 			ALTER TABLE #TEMP ADD ContactID INT NOT NULL DEFAULT 0;
-			ALTER TABLE #TEMP ADD Disection_Refer NVARCHAR(8) NOT NULL DEFAULT \'\';
-			ALTER TABLE #TEMP ADD Disection_FileAs NVARCHAR(200) NOT NULL DEFAULT \'\';
+			ALTER TABLE #TEMP ADD Dissection_Refer NVARCHAR(8) NOT NULL DEFAULT \'\';
+			ALTER TABLE #TEMP ADD Dissection_FileAs NVARCHAR(200) NOT NULL DEFAULT \'\';
 
 			-- SELECT * FROM #TEMP;
 
@@ -111,8 +110,8 @@ class db {
 			UPDATE
         t
         SET
-          t.Disection_Refer = d.Reference,
-          t.Disection_FileAs = d.FileAs
+          t.Dissection_Refer = d.Reference,
+          t.Dissection_FileAs = d.FileAs
           FROM
             #TEMP t
             INNER JOIN Dissections d
@@ -127,6 +126,10 @@ class db {
 
 		$sql = 'SELECT
 				t.*,
+				Contacts.Salutation,
+				Contacts.First,
+				Contacts.Middle,
+				Contacts.Last,
 				Contacts.Mobile,
 				Contacts.Email
 			FROM #TEMP t
@@ -138,7 +141,45 @@ class db {
 
 	}
 
-  static public function tenants() {
+	static public function contacts() {
+		$sql = 'SELECT
+			ID,
+			FileAs,
+			Title,
+			First,
+			Middle,
+			Last,
+			HomeStreet,
+			HomeCity,
+			HomeState,
+			HomePostcode,
+			HomeCountry,
+			MailingStreet,
+			MailingCity,
+			MailingState,
+			MailingPostcode,
+			MailingCountry,
+			Salutation,
+			Company,
+			Business,
+			Home,
+			Mobile,
+			Email,
+			GUID
+		FROM
+			Contacts
+		WHERE
+			NOT Contacts.Inactive = 1';
+
+		$conn = self::connection();
+		$ret = $conn->Result( $sql);
+		//~ \sys::logger( 'have contacts');
+
+		return ( $ret);
+
+	}
+
+	static public function tenants() {
 		$sql =
 			'IF OBJECT_ID(\'tempdb..#TEMP\') IS NOT NULL DROP TABLE #TEMP;
 
@@ -216,6 +257,28 @@ class db {
 			ORDER BY t.ID ASC;';
 
 		return $conn->Result($sql);
+
+	}
+
+	static public function tenantLinks( $id) {
+		if ( (int)$id) {
+			$sql = sprintf( 'SELECT
+					ID,
+					FileID,
+					ContactID
+				FROM
+					ContactsLink
+				WHERE
+					ContactID = %d', $id);
+
+			$conn = self::connection();
+			$ret = $conn->Result( $sql);
+
+			return ( $ret);
+
+		}
+
+		return false;
 
 	}
 

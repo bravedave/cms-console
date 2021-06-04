@@ -9,19 +9,29 @@
             "email": "david@brayworth.com.au"
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "green": {
+            "type": "git",
+            "url": "https://github.com/bravedave/green"
+        },
+        "dvc": {
             "type": "git",
             "url": "https://github.com/bravedave/dvc"
         }
-    ],
+    },
     "require": {
         "ext-sqlsrv": "*",
-        "bravedave/dvc": "*"
+        "bravedave/dvc": "*",
+        "bravedave/green": "dev-master"
+    },
+    "require-dev": {
+        "ext-apcu": "*",
+        "matthiasmullie/scrapbook": "*"
     },
     "autoload": {
         "psr-4": {
-            "cms\\console\\": "src/console/"
+            "cms\\console\\": "src/console/",
+            "cms\\job\\": "src/job/"
         }
     },
     "autoload-dev": {
@@ -30,7 +40,12 @@
         }
     },
     "scripts": {
-        "post-update-cmd": "cms\\console\\postUpdate::upgrade"
+        "post-update-cmd": [
+            "cms\\console\\utility::upgrade",
+            "cms\\console\\utility::upgrade_dev",
+            "cms\\job\\utility::upgrade"
+        ],
+        "import-contacts": "cms\\console\\utility::import_contacts",
+        "import-contractors": "cms\\job\\utility::import_contractors"
     }
-
 }

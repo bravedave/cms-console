@@ -15,11 +15,21 @@ use dvc\service;
 // use green;
 
 class utility extends service {
-  protected function _import_contractors() {
+  protected function _contractors_import() {
     $dao = new dao\job_contractors;
 
     $dao->import_from_console();
     echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'import complete', __METHOD__, PHP_EOL));
+
+  }
+
+  protected function _contractors_reset() {
+    $dao = new dao\job_contractors;
+    $dao->Q( 'DROP TABLE IF EXISTS job_contractors');
+    $dao->Q( 'DROP TABLE IF EXISTS job_categories');
+
+    $dao = new dao\dbinfo;
+    $dao->dump($verbose = false);
 
   }
 
@@ -42,9 +52,15 @@ class utility extends service {
 
   }
 
-  static function import_contractors() {
+  static function contractors_import() {
     $app = new self( application::startDir());
-    $app->_import_contractors();
+    $app->_contractors_import();
+
+  }
+
+  static function contractors_reset() {
+    $app = new self( application::startDir());
+    $app->_contractors_reset();
 
   }
 

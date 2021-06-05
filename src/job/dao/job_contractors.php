@@ -19,7 +19,7 @@ use green;
 class job_contractors extends _dao {
   protected $_db_name = 'job_contractors';
 
-  function getByTradingName( string $name) : ?\dao\dto\dto {
+  public function getByTradingName( string $name) : ?\dao\dto\dto {
     if ( 'sqlite' == \config::$DB_TYPE) {
       $sql = sprintf(
         "SELECT
@@ -63,7 +63,35 @@ class job_contractors extends _dao {
 
   }
 
-  function import_from_console() {
+  public function getReportSet() {
+    $sql = sprintf(
+      'SELECT
+        c.id,
+        c.trading_name,
+        c.services,
+        c.primary_contact,
+        p.name,
+        p.mobile,
+        p.telephone,
+        p.telephone_business,
+        p.email,
+        p.salute
+      FROM
+        `%s` c
+        LEFT JOIN people p ON p.id = c.primary_contact
+      ORDER BY
+        c.trading_name',
+      $this->db_name()
+
+    );
+
+    \sys::logSQL( sprintf('<%s> %s', $sql, __METHOD__));
+
+    return $this->Result($sql);
+
+  }
+
+  public function import_from_console() {
     if ( $creditors = cms\console\db::creditors()) {
 
       // $this->Q( 'UPDATE `job_contractors` set `services` = ""');  // disable this !
@@ -87,11 +115,15 @@ class job_contractors extends _dao {
           if ( $_dto->abn != $dto->ABN) $a['abn'] = $dto->ABN;
           if ( $dto->Dissection_FileAs) {
             $JCdao = new job_categories;
-            if ( $JCdto = $JCdao->getByCategory( $dto->Dissection_FileAs, $autoAdd = true)) {
+            if ( $JCdto = $JCdao->getByCategory( trim( $dto->Dissection_FileAs), $autoAdd = true)) {
               $services = $_dto->services ? explode(',', $_dto->services) : [];
               if ( !( in_array( $JCdto->id, $services) )) {
-                $sevices[] = (string)$JCdto->id;
+
+                $services[] = (string)$JCdto->id;
                 $a['services'] = implode( ',', $services);
+
+                // \sys::logger( sprintf('<%s?%s> <%s> <%s> %s', $JCdto->id, $_dto->services, $a['services'], print_r( $services, true), __METHOD__));
+                // die;
 
               }
 
@@ -127,7 +159,7 @@ class job_contractors extends _dao {
 
           if ( $dto->Dissection_FileAs) {
             $JCdao = new job_categories;
-            if ( $JCdto = $JCdao->getByCategory( $dto->Dissection_FileAs, $autoAdd = true)) {
+            if ( $JCdto = $JCdao->getByCategory( trim( $dto->Dissection_FileAs), $autoAdd = true)) {
               $a['services'] = (string)$JCdto->id;
 
             }

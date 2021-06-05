@@ -18,8 +18,9 @@ use green;
 
 class job_categories extends _dao {
   protected $_db_name = 'job_categories';
+  protected $template = __NAMESPACE__ . '\dto\job_categories';
 
-  function getByCategory( string $category, bool $autoAdd = false) : ?\dao\dto\dto {
+  public function getByCategory( string $category, bool $autoAdd = false) : ?dto\job_categories {
     $sql = sprintf(
       'SELECT
         *
@@ -33,7 +34,7 @@ class job_categories extends _dao {
     );
 
     if ( $res = $this->Result( $sql)) {
-      if ( $dto = $res->dto()) {
+      if ( $dto = $res->dto($this->template)) {
         return $dto;
 
       }
@@ -49,6 +50,19 @@ class job_categories extends _dao {
     }
 
     return null;
+
+  }
+
+  public static function getCategorySet() {
+    $dao = new self;
+    $_cats = $dao->dtoSet( $dao->getAll());
+    $_set = [];
+    foreach ($_cats as $_cat) {
+      $_set[$_cat->id] = $_cat->category;
+
+    }
+
+    return $_set;
 
   }
 

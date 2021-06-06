@@ -31,15 +31,7 @@ class utility extends service {
 
     config::cms_console_checkdatabase();
 
-    green\baths\config::green_baths_checkdatabase();
-    green\beds_list\config::green_beds_list_checkdatabase();
-
     green\people\config::green_people_checkdatabase();
-    green\properties\config::green_properties_checkdatabase();
-    green\property_diary\config::green_property_diary_checkdatabase();
-    green\property_type\config::green_property_type_checkdatabase();
-    green\postcodes\config::green_postcodes_checkdatabase();
-    green\users\config::green_users_checkdatabase();
 
     echo( sprintf('%s : %s%s', 'updated', __METHOD__, PHP_EOL));
 

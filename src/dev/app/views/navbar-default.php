@@ -29,14 +29,6 @@
     <div class="collapse navbar-collapse" id="<?= $_uid ?>">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= strings::url('job') ?>">
-            <?= cms\job\config::label ?>
-
-          </a>
-
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link" href="<?= strings::url('console_creditors') ?>">
             Creditors
 
@@ -52,13 +44,6 @@
 
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?= strings::url('people') ?>">People</a>
-            <a class="dropdown-item" href="<?= strings::url('properties') ?>">Properties</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<?= strings::url('beds') ?>">Beds</a>
-            <a class="dropdown-item" href="<?= strings::url('baths') ?>">Baths</a>
-            <a class="dropdown-item" href="<?= strings::url('property_type') ?>">Property Type</a>
-            <a class="dropdown-item" href="<?= strings::url('postcodes') ?>">Postcodes</a>
-            <a class="dropdown-item" href="<?= strings::url('users') ?>">Users</a>
 
           </div>
 

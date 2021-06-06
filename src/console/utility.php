@@ -39,12 +39,6 @@ class utility extends service {
 
   protected function _upgrade_dev() {
     config::route_register( 'people', 'green\\people\\controller');
-    config::route_register( 'properties', 'green\\properties\\controller');
-    config::route_register( 'beds', 'green\\beds_list\\controller');
-    config::route_register( 'baths', 'green\\baths\\controller');
-    config::route_register( 'property_type', 'green\\property_type\\controller');
-    config::route_register( 'postcodes', 'green\\postcodes\\controller');
-    config::route_register( 'users', 'green\\users\\controller');
 
     echo( sprintf('%s : %s%s', 'updated (dev)', __METHOD__, PHP_EOL));
 

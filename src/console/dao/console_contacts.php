@@ -288,7 +288,7 @@ class console_contacts extends _dao {
         'name' => implode( ' ', $a)
 
       ];
-      if ( $dto->Salutation) $a['salute'] = $dto->Salutation;
+      if ( $dto->Salutation) $a['salutation'] = $dto->Salutation;
 
       if ( strings::isMobilePhone( $dto->Mobile)) $a['mobile'] = $dto->Mobile;
       if ( strings::isPhone( $dto->Home)) $a['phone'] = $dto->Home;

@@ -264,51 +264,56 @@ class console_contacts extends _dao {
       people_id = 0';
     if ( $res = $this->Result( $sql)) {
       $res->dtoSet( function( $dto) {
-        $a = [];
-        if ( $dto->First) $a[] = $dto->First;
-        if ( $dto->Middle) $a[] = $dto->Middle;
-        if ( $dto->Last) $a[] = $dto->Last;
-
-        if ( !$a) {
-          if ( $dto->Company) $a[] = $dto->Company;
-
-        }
-
-        if ( $a) {
-          $a = [
-            'name' => implode( ' ', $a)
-
-          ];
-          if ( $dto->Salutation) $a['salute'] = $dto->Salutation;
-
-          if ( strings::isMobilePhone( $dto->Mobile)) $a['mobile'] = $dto->Mobile;
-          if ( strings::isPhone( $dto->Home)) $a['phone'] = $dto->Home;
-          if ( strings::isPhone( $dto->Business)) $a['telephone_business'] = $dto->Business;
-          if ( strings::isEmail( $dto->Email)) $a['email'] = $dto->Email;
-
-          $Pdto = green\people\dao\QuickPerson::find( $a);
-          if ( isset( $Pdto->errorText)) {
-            \sys::logger( sprintf('<%s> <%s> %s', $a['name'], $Pdto->errorText, __METHOD__));
-
-          }
-          else {
-
-            $this->UpdateByID([ 'people_id' => $Pdto->id ], $dto->id);
-
-            if ( isset( $Pdto->isNew) && $Pdto->isNew) {
-              \sys::logger( sprintf('<%s> <#%s> <NEW> %s', $Pdto->name, $Pdto->id, __METHOD__));
-
-            }
-            else {
-              \sys::logger( sprintf('<%s> <#%s> %s', $Pdto->name, $Pdto->id, __METHOD__));
-
-            }
-
-          }
-
-        }
+        $this->reconcile_person( $dto);
 
       });
+
+    }
+
+  }
+
+  public function reconcile_person( $dto) {
+    $a = [];
+    if ( $dto->First) $a[] = $dto->First;
+    if ( $dto->Middle) $a[] = $dto->Middle;
+    if ( $dto->Last) $a[] = $dto->Last;
+
+    if ( !$a) {
+      if ( $dto->Company) $a[] = $dto->Company;
+
+    }
+
+    if ( $a) {
+      $a = [
+        'name' => implode( ' ', $a)
+
+      ];
+      if ( $dto->Salutation) $a['salute'] = $dto->Salutation;
+
+      if ( strings::isMobilePhone( $dto->Mobile)) $a['mobile'] = $dto->Mobile;
+      if ( strings::isPhone( $dto->Home)) $a['phone'] = $dto->Home;
+      if ( strings::isPhone( $dto->Business)) $a['telephone_business'] = $dto->Business;
+      if ( strings::isEmail( $dto->Email)) $a['email'] = $dto->Email;
+
+      $Pdto = green\people\dao\QuickPerson::find( $a);
+      if ( isset( $Pdto->errorText)) {
+        \sys::logger( sprintf('<%s> <%s> %s', $a['name'], $Pdto->errorText, __METHOD__));
+
+      }
+      else {
+
+        $this->UpdateByID([ 'people_id' => $Pdto->id ], $dto->id);
+
+        if ( isset( $Pdto->isNew) && $Pdto->isNew) {
+          \sys::logger( sprintf('<%s> <#%s> <NEW> %s', $Pdto->name, $Pdto->id, __METHOD__));
+
+        }
+        else {
+          \sys::logger( sprintf('<%s> <#%s> %s', $Pdto->name, $Pdto->id, __METHOD__));
+
+        }
+
+      }
 
     }
 

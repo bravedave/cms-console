@@ -43,6 +43,7 @@
             "cms\\console\\utility::upgrade",
             "cms\\console\\utility::upgrade_dev"
         ],
-        "import-contacts": "cms\\console\\utility::import_contacts"
+        "import-contacts": "cms\\console\\utility::import_contacts",
+        "import-properties": "cms\\console\\utility::import_properties"
     }
 }

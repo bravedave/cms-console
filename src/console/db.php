@@ -179,6 +179,41 @@ class db {
 
 	}
 
+	static public function properties() {
+		$sql = 'SELECT
+			Properties.ID,
+			Properties.Street,
+			Properties.City,
+			Properties.State,
+			Properties.Postcode,
+			Properties.Rent,
+			Properties.Period,
+			Properties.LetFee,
+			Properties.Bedrooms,
+			Properties.Bathrooms,
+			Properties.Furnished,
+			Properties.Fenced,
+			Properties.Pets,
+			Properties.CarAccomm,
+			Properties.Zone,
+			Properties.Type,
+			Properties.[Key],
+			Properties.PropertyManagerID,
+			Properties.OwnerID,
+			Users.Code PropertyManager,
+			Properties.GUID,
+			Properties.Inactive
+		FROM Properties
+			LEFT JOIN users ON users.ID = Properties.PropertyManagerID
+		WHERE
+			NOT Properties.Inactive = 1 AND NOT Properties.Deleted = 1;';
+		//~ WHERE NOT Properties.inactive = 1;
+
+		$conn = self::connection();
+		return $conn->Result($sql);
+
+	}
+
 	static public function tenants() {
 		$sql =
 			'IF OBJECT_ID(\'tempdb..#TEMP\') IS NOT NULL DROP TABLE #TEMP;

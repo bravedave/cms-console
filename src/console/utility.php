@@ -26,6 +26,19 @@ class utility extends service {
 
   }
 
+  protected function _import_properties() {
+    $dao = new dao\console_properties;
+    $dao->import();
+    // $dao = new dao\console_contacts;
+
+    // $dao->import();
+    // echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'import complete', __METHOD__, PHP_EOL));
+
+    // $dao->reconcile_people();
+    // echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'reconsole complete', __METHOD__, PHP_EOL));
+
+  }
+
   protected function _upgrade() {
     config::route_register( 'console_creditors', 'cms\\console\\creditors');
 
@@ -59,6 +72,12 @@ class utility extends service {
   static function import_contacts() {
     $app = new self( application::startDir());
     $app->_import_contacts();
+
+  }
+
+  static function import_properties() {
+    $app = new self( application::startDir());
+    $app->_import_properties();
 
   }
 

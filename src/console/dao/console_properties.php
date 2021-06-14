@@ -192,10 +192,18 @@ class console_properties extends _dao {
     $street = sprintf('%s, %s %s %s', trim( $dto->Street, ', '), $dto->City, $dto->State, $dto->Postcode);
     $dao = new properties;
     if ( $_dto = $dao->getByStreet( $street)) {
-      // if ( !$_dto->property_manager) {
-      //   \sys::logger( sprintf('<%s> %s', $dto->PropertyManager, __METHOD__));
+      $udao = new users;
+      if ( $udto = $udao->getByConsoleCode( $dto->PropertyManager)) {
+        // if ( $_dto->property_manager != $udto->id) {
+        //   $dao->UpdateByID([
+        //     'property_manager' => $udto->id
 
-      // }
+        //   ], $_dto->id);
+        //   \sys::logger( sprintf('<%s> %s', $dto->PropertyManager, __METHOD__));
+
+        // }
+
+      }
 
     }
 

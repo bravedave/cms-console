@@ -42,10 +42,11 @@ class utility extends service {
   protected function _upgrade() {
     config::route_register( 'console_creditors', 'cms\\console\\creditors');
 
-    config::cms_console_checkdatabase();
-
     green\people\config::green_people_checkdatabase();
     green\properties\config::green_properties_checkdatabase();
+    green\users\config::green_users_checkdatabase();
+
+    config::cms_console_checkdatabase();
 
     echo( sprintf('%s : %s%s', 'updated', __METHOD__, PHP_EOL));
 

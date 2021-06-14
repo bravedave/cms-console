@@ -174,7 +174,7 @@ class console_properties extends _dao {
     $sql =
       'SELECT
       `id`,
-      `Street`, `City`, `State`, `Postcode`, `PropertyManager`
+      `Street`, `City`, `State`, `Postcode`, `PropertyManager`, `properties_id`
     FROM
       `console_properties`
     WHERE
@@ -192,6 +192,14 @@ class console_properties extends _dao {
     $street = sprintf('%s, %s %s %s', trim( $dto->Street, ', '), $dto->City, $dto->State, $dto->Postcode);
     $dao = new properties;
     if ( $_dto = $dao->getByStreet( $street)) {
+      if ( $dto->properties_id != $_dto->id) {
+        $this->UpdateByID([
+          'properties_id' => $_dto->id
+
+        ], $dto->id);
+
+      }
+
       $udao = new users;
       if ( $udto = $udao->getByConsoleCode( $dto->PropertyManager)) {
         // if ( $_dto->property_manager != $udto->id) {

@@ -170,4 +170,35 @@ class console_properties extends _dao {
     }
   }
 
+  public function reconcile_properties() {
+    $sql =
+      'SELECT
+      `id`,
+      `Street`, `City`, `State`, `Postcode`, `PropertyManager`
+    FROM
+      `console_properties`
+    WHERE
+      properties_id = 0';
+    if ($res = $this->Result($sql)) {
+      $res->dtoSet(function ($dto) {
+        $this->reconcile_property($dto);
+      });
+    }
+
+  }
+
+  public function reconcile_property( $dto) {
+    // \sys::logger( sprintf('<%s> %s', $dto->Street, __METHOD__));
+    $street = sprintf('%s, %s %s %s', trim( $dto->Street, ', '), $dto->City, $dto->State, $dto->Postcode);
+    $dao = new properties;
+    if ( $_dto = $dao->getByStreet( $street)) {
+      // if ( !$_dto->property_manager) {
+      //   \sys::logger( sprintf('<%s> %s', $dto->PropertyManager, __METHOD__));
+
+      // }
+
+    }
+
+  }
+
 }

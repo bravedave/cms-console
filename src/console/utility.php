@@ -34,8 +34,8 @@ class utility extends service {
     // $dao->import();
     // echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'import complete', __METHOD__, PHP_EOL));
 
-    // $dao->reconcile_people();
-    // echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'reconsole complete', __METHOD__, PHP_EOL));
+    $dao->reconcile_properties();
+    echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'reconsole complete', __METHOD__, PHP_EOL));
 
   }
 
@@ -45,6 +45,7 @@ class utility extends service {
     config::cms_console_checkdatabase();
 
     green\people\config::green_people_checkdatabase();
+    green\properties\config::green_properties_checkdatabase();
 
     echo( sprintf('%s : %s%s', 'updated', __METHOD__, PHP_EOL));
 

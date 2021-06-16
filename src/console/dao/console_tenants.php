@@ -14,6 +14,8 @@ use cms\console\db;
 use dao\_dao;
 
 class console_tenants extends _dao {
+  protected $_db_name = 'console_tenants';
+
   public function getVersion() {
     $sql = sprintf(
       'SELECT MAX(version) v FROM `%s`',

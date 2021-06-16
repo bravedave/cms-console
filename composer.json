@@ -10,6 +10,10 @@
         }
     ],
     "repositories": {
+        "cms-leasing": {
+            "type": "git",
+            "url": "https://github.com/bravedave/cms-leasing"
+        },
         "green": {
             "type": "git",
             "url": "https://github.com/bravedave/green"
@@ -22,7 +26,8 @@
     "require": {
         "ext-sqlsrv": "*",
         "bravedave/dvc": "*",
-        "bravedave/green": "dev-master"
+        "bravedave/green": "dev-master",
+        "bravedave/cms-leasing": "dev-main"
     },
     "require-dev": {
         "ext-apcu": "*",
@@ -44,6 +49,7 @@
             "cms\\console\\utility::upgrade_dev"
         ],
         "import-contacts": "cms\\console\\utility::import_contacts",
-        "import-properties": "cms\\console\\utility::import_properties"
+        "import-properties": "cms\\console\\utility::import_properties",
+        "import-tenants": "cms\\console\\utility::import_tenants"
     }
 }

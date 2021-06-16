@@ -39,6 +39,14 @@ class utility extends service {
 
   }
 
+  protected function _import_tenants() {
+    $dao = new dao\console_tenants;
+    $dao->import();
+
+    echo( sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'import tenants complete', __METHOD__, PHP_EOL));
+
+  }
+
   protected function _upgrade() {
     config::route_register( 'console_creditors', 'cms\\console\\creditors');
 
@@ -80,6 +88,12 @@ class utility extends service {
   static function import_properties() {
     $app = new self( application::startDir());
     $app->_import_properties();
+
+  }
+
+  static function import_tenants() {
+    $app = new self( application::startDir());
+    $app->_import_tenants();
 
   }
 

@@ -13,6 +13,8 @@ namespace cms\console;
 use sys;
 
 class db {
+	const contactslink_filetype_tenants = 2;	// See SELECT * FROM FileTypes
+
   const contactslink_filetype_creditors = 5;
 
   static public function connection() : ?\dvc\mssql\db {
@@ -55,7 +57,33 @@ class db {
 
   }
 
-  static public function creditors() {
+	static public function contactLinks($id) {
+		if ((int)$id) {
+			$sql = sprintf(
+				'SELECT
+					ID,
+					FileID,
+					ContactID
+				FROM
+					ContactsLink
+				WHERE
+					FileType = %d
+					AND FileID = %d',
+				self::contactslink_filetype_tenants,
+				$id
+			);
+
+			$conn = self::connection();
+			$ret = $conn->Result($sql);
+			//~ \sys::logger( 'have contacts');
+
+			return ($ret);
+		}
+
+		return false;
+	}
+
+	static public function creditors() {
     // [WithholdAmount]             MONEY            NULL,
     // [WithholdReason]             NVARCHAR (50)    NULL,
     // [WithholdUntilDisbursed]     BIT              DEFAULT ((0)) NOT NULL,

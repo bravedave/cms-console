@@ -26,8 +26,8 @@
     "require": {
         "ext-sqlsrv": "*",
         "bravedave/dvc": "*",
-        "bravedave/green": "dev-master",
-        "bravedave/cms-leasing": "dev-main"
+        "bravedave/green": "*",
+        "bravedave/cms-leasing": "*"
     },
     "require-dev": {
         "ext-apcu": "*",

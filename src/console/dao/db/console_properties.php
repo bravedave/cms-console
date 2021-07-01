@@ -36,8 +36,8 @@ $dbc->defineField('version', 'bigint');
 $dbc->defineField('properties_id', 'bigint');
 $dbc->defineField('PropertyManager', 'varchar', 50);
 
-$dbc->defineIndex('GUID', 'GUID');
-$dbc->defineIndex('properties_id', 'properties_id');
-$dbc->defineIndex('version', 'version');
+$dbc->defineIndex('idx_console_properties_GUID', 'GUID');
+$dbc->defineIndex('idx_console_properties_properties_id', 'properties_id');
+$dbc->defineIndex('idx_console_properties_version', 'version');
 
 $dbc->check();

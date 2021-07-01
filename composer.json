@@ -51,6 +51,7 @@
     "import-contacts": "cms\\console\\utility::import_contacts",
     "import-maintenance": "cms\\console\\utility::import_maintenance",
     "import-properties": "cms\\console\\utility::import_properties",
+    "import-owners": "cms\\console\\utility::import_owners",
     "import-tenants": "cms\\console\\utility::import_tenants"
   }
 }

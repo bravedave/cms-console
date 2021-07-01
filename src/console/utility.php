@@ -31,13 +31,13 @@ class utility extends service {
     $dao->import();
 
     echo (sprintf(
-        '%s: %s : %s%s',
-        application::app()->timer()->elapsed(),
-        'import complete',
-        __METHOD__,
-        PHP_EOL
+      '%s: %s : %s%s',
+      application::app()->timer()->elapsed(),
+      'import complete',
+      __METHOD__,
+      PHP_EOL
 
-      ));
+    ));
   }
 
   protected function _import_properties() {
@@ -50,6 +50,19 @@ class utility extends service {
 
     $dao->reconcile_properties();
     echo (sprintf('%s: %s : %s%s', application::app()->timer()->elapsed(), 'reconsole complete', __METHOD__, PHP_EOL));
+  }
+
+  protected function _import_owners() {
+    $dao = new dao\console_owners;
+    $dao->import();
+
+    echo (sprintf(
+        '%s: %s : %s%s',
+        application::app()->timer()->elapsed(),
+        'import owners complete',
+        __METHOD__,
+        PHP_EOL
+      ));
   }
 
   protected function _import_tenants() {
@@ -100,6 +113,11 @@ class utility extends service {
   static function import_properties() {
     $app = new self(application::startDir());
     $app->_import_properties();
+  }
+
+  static function import_owners() {
+    $app = new self(application::startDir());
+    $app->_import_owners();
   }
 
   static function import_tenants() {

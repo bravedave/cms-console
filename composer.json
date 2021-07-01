@@ -1,55 +1,56 @@
 {
-    "name": "bravedave/cms-console",
-    "description": "CMS Console Access",
-    "minimum-stability": "dev",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Dave Bray",
-            "email": "david@brayworth.com.au"
-        }
-    ],
-    "repositories": {
-        "cms-leasing": {
-            "type": "git",
-            "url": "https://github.com/bravedave/cms-leasing"
-        },
-        "green": {
-            "type": "git",
-            "url": "https://github.com/bravedave/green"
-        },
-        "dvc": {
-            "type": "git",
-            "url": "https://github.com/bravedave/dvc"
-        }
-    },
-    "require": {
-        "ext-sqlsrv": "*",
-        "bravedave/dvc": "*",
-        "bravedave/green": "*",
-        "bravedave/cms-leasing": "*"
-    },
-    "require-dev": {
-        "ext-apcu": "*",
-        "matthiasmullie/scrapbook": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "cms\\console\\": "src/console/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "": "src/dev/app/"
-        }
-    },
-    "scripts": {
-        "post-update-cmd": [
-            "cms\\console\\utility::upgrade",
-            "cms\\console\\utility::upgrade_dev"
-        ],
-        "import-contacts": "cms\\console\\utility::import_contacts",
-        "import-properties": "cms\\console\\utility::import_properties",
-        "import-tenants": "cms\\console\\utility::import_tenants"
+  "name": "bravedave/cms-console",
+  "description": "CMS Console Access",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dave Bray",
+      "email": "david@brayworth.com.au"
     }
+  ],
+  "repositories": {
+    "cms-leasing": {
+      "type": "git",
+      "url": "https://github.com/bravedave/cms-leasing"
+    },
+    "green": {
+      "type": "git",
+      "url": "https://github.com/bravedave/green"
+    },
+    "dvc": {
+      "type": "git",
+      "url": "https://github.com/bravedave/dvc"
+    }
+  },
+  "require": {
+    "ext-sqlsrv": "*",
+    "bravedave/dvc": "*",
+    "bravedave/green": "*",
+    "bravedave/cms-leasing": "*"
+  },
+  "require-dev": {
+    "ext-apcu": "*",
+    "matthiasmullie/scrapbook": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "cms\\console\\": "src/console/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "src/dev/app/"
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "cms\\console\\utility::upgrade",
+      "cms\\console\\utility::upgrade_dev"
+    ],
+    "import-contacts": "cms\\console\\utility::import_contacts",
+    "import-maintenance": "cms\\console\\utility::import_maintenance",
+    "import-properties": "cms\\console\\utility::import_properties",
+    "import-tenants": "cms\\console\\utility::import_tenants"
+  }
 }

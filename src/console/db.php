@@ -207,6 +207,53 @@ class db {
 
 	}
 
+	static public function owners_maintenance() {
+		$sql = 'SELECT
+			OM.ID,
+			OM.OwnerID,
+			OM.ContactID,
+			OM.Type,
+			OM.Name,
+			OM.Company,
+			OM.Position,
+			OM.Business,
+			OM.Home,
+			OM.Mobile,
+			OM.Fax,
+			OM.Email,
+			OM.Limit,
+			OM.Notes,
+			OM.GUID,
+			OM.ModifiedDateUTC,
+			OM.RowVersion
+		FROM OwnersMaintenance OM;';
+		//~ WHERE NOT Properties.inactive = 1;
+
+		$conn = self::connection();
+		return $conn->Result($sql);
+
+		/*
+		[ID]              INT              IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+		[OwnerID]         INT              NULL,
+		[ContactID]       INT              NULL,
+		[Type]            NVARCHAR (50)    NULL,
+		[Name]            NVARCHAR (50)    NULL,
+		[Company]         NVARCHAR (50)    NULL,
+		[Position]        NVARCHAR (50)    NULL,
+		[Business]        NVARCHAR (50)    NULL,
+		[Home]            NVARCHAR (50)    NULL,
+		[Mobile]          NVARCHAR (50)    NULL,
+		[Fax]             NVARCHAR (50)    NULL,
+		[Email]           NVARCHAR (50)    NULL,
+		[Limit]           MONEY            NULL,
+		[Notes]           NTEXT            NULL,
+		[GUID]            UNIQUEIDENTIFIER ROWGUIDCOL NOT NULL,
+		[ModifiedDateUTC] DATETIME         NOT NULL,
+		[RowVersion]      ROWVERSION       NOT NULL
+		);
+		*/
+	}
+
 	static public function properties() {
 		$sql = 'SELECT
 			Properties.ID,

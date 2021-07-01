@@ -40,7 +40,7 @@ class console_owners_maintenance extends _dao {
 				LEFT JOIN
 			`console_owners` co ON co.`ConsoleID` = cm.`OwnerID`
 		WHERE
-			NOT ISNULL( co.`ConsoleID`)
+			co.`ConsoleID` IS NOT NULL
 		ORDER BY
 			cm.`OwnerID`';
 

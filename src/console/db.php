@@ -207,6 +207,60 @@ class db {
 
 	}
 
+	static public function owners() {
+		$sql = "
+		IF OBJECT_ID('tempdb..#TEMP') IS NOT NULL DROP TABLE #TEMP;
+
+		SELECT
+			o.ID,
+			o.FileAs,
+			p.Street,
+			p.City,
+			p.State,
+			p.Postcode,
+			p.id AS PropertyID,
+			p.GUID
+		INTO #TEMP
+		FROM
+			Properties p
+			INNER JOIN
+				Owners o
+					ON o.ID = p.OwnerID AND NOT o.Inactive = 1
+			WHERE NOT p.Deleted = 1;
+
+		ALTER TABLE #TEMP ADD ContactID INT NOT NULL DEFAULT 0;
+
+		UPDATE
+			t
+		SET
+			t.ContactID = c.ContactID
+		FROM
+			#TEMP t
+			INNER JOIN ContactsLink c
+				ON c.FileID = t.id AND c.FileType = 4;";
+
+		$conn = self::connection();
+		$conn->Q($sql);
+
+		$sql = "SELECT
+				t.ID,
+				t.FileAs,
+				Contacts.Mobile,
+				Contacts.Email,
+				t.Street,
+				t.City,
+				t.State,
+				t.Postcode,
+				t.GUID,
+				t.ContactID
+			FROM #TEMP t
+				INNER JOIN Contacts
+					ON Contacts.ID = t.ContactID
+			ORDER BY t.ID ASC;";
+
+		return $conn->Result($sql);
+	}
+
 	static public function owners_maintenance() {
 		$sql = 'SELECT
 			OM.ID,

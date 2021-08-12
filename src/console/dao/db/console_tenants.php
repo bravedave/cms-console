@@ -32,6 +32,7 @@ $dbc->defineField('LeaseStart', 'date');
 $dbc->defineField('LeaseStop', 'date');
 $dbc->defineField('LeaseTerm', 'varchar', 50);
 $dbc->defineField('Vacating', 'date');
+$dbc->defineField('Vacate_Override', 'date');
 $dbc->defineField('Inactive', 'tinyint');
 $dbc->defineField('Seen', 'tinyint');
 $dbc->defineField('Key', 'varchar', 50);

@@ -12,7 +12,7 @@
 namespace cms\console;
 
 class config extends \config {
-	const cms_console_db_version = 0.7;
+	const cms_console_db_version = 0.8;
 
   const label_creditors = 'Console Creditors';
 

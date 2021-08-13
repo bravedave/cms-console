@@ -34,11 +34,14 @@ class console_owners_maintenance extends _dao {
 			cm.`Email`,
 			cm.`Fax`,
 			cm.`Limit`,
-			cm.`Notes`
+			cm.`Notes`,
+			cc.`people_id`
 		FROM
 			`console_owners_maintenance` cm
 				LEFT JOIN
 			`console_owners` co ON co.`ConsoleID` = cm.`OwnerID`
+				LEFT JOIN
+			`console_contacts` cc ON cc.`ConsoleID` = co.`ContactID`
 		WHERE
 			co.`ConsoleID` IS NOT NULL
 		ORDER BY

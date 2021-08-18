@@ -200,8 +200,8 @@ class console_properties extends _dao {
 
       }
 
-      $udao = new users;
-      if ( $udto = $udao->getByConsoleCode( $dto->PropertyManager)) {
+      // $udao = new users;
+      // if ( $udto = $udao->getByConsoleCode( $dto->PropertyManager)) {
         // if ( $_dto->property_manager != $udto->id) {
         //   $dao->UpdateByID([
         //     'property_manager' => $udto->id
@@ -211,7 +211,7 @@ class console_properties extends _dao {
 
         // }
 
-      }
+      // }
 
     }
 

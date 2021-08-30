@@ -16,6 +16,9 @@ use dao\_dao;
 class console_properties extends _dao {
 	protected $_db_name = 'console_properties';
 
+  const rent_period_week = 0;
+  const rent_period_month = 3;
+
   protected function getByGUID($guid) {  // deprecating
     if ($guid = (string)$guid) {
       if ($res = $this->Result(sprintf('SELECT * FROM `%s` WHERE GUID = "%s"', $this->_db_name, $this->escape($guid)))) {

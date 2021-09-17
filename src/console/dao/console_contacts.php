@@ -91,6 +91,13 @@ class console_contacts extends _dao {
 				'total' => 0
 			];
 
+      $all = [];
+      if ($_res = $this->Result('SELECT `id` FROM `console_contacts`')) {
+        while ($_dto = $_res->dto()) {
+          $all[] = $_dto->id;
+        }
+      }
+
 			$ref = $this->getGUIDReferenceSet();
 			while ( $_dto = $res->dto()) {
 				$stats->{'total'} ++;
@@ -104,6 +111,11 @@ class console_contacts extends _dao {
 
 				if ( $dto) {
 				//~ if ( $dto = $this->getByGUID( (string)$_dto->GUID)) {
+
+          $index = array_search($dto->id, $all);
+          if ($index !== false) {
+            unset($all[$index]);
+          }
 
 					//~ continue;
 					$a = [];
@@ -207,13 +219,16 @@ class console_contacts extends _dao {
 
       }
 
+      foreach ($all as $e) {
+        $this->delete($e);
+        \sys::logger(sprintf('delete : %s', $e));
+      }
+
       $aDel = [];
       foreach ($ref as $cc) {
         if ( !$cc->active_in_console) {
           $aDel[] = $cc->id;
           $stats->deleted ++;
-
-
 
         }
 

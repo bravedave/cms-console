@@ -261,7 +261,7 @@ class console_contacts extends _dao {
 
 		}
 		else {
-      sys::logger( sprintf('<%s> %s', 'no console_owners', __METHOD__));
+      sys::logger( sprintf('<%s> %s', 'no console_contacts', __METHOD__));
 
 		}
 

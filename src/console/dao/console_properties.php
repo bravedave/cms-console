@@ -17,6 +17,7 @@ class console_properties extends _dao {
 	protected $_db_name = 'console_properties';
 
   const rent_period_week = 0;
+  const rent_period_fortnight = 1;
   const rent_period_month = 3;
 
   protected function getByGUID($guid) {  // deprecating

@@ -26,11 +26,11 @@
   "require": {
     "ext-sqlsrv": "*",
     "bravedave/dvc": "*",
-    "bravedave/green": "*",
-    "bravedave/cms-leasing": "*"
+    "bravedave/green": "*"
   },
   "require-dev": {
     "ext-apcu": "*",
+    "bravedave/cms-leasing": "*",
     "matthiasmullie/scrapbook": "*"
   },
   "autoload": {

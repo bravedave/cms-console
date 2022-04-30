@@ -10,9 +10,9 @@
 
 namespace cms\console\dao;
 
-use green;
+use dao;
 
-class properties extends green\properties\dao\properties {
+class properties extends dao\properties {
   protected function _unMangle( string $street) {
     $o = new dto\street;
     $_street = $street;

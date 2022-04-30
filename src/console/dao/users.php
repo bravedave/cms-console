@@ -10,9 +10,9 @@
 
 namespace cms\console\dao;
 
-use green;
+use dao;
 
-class users extends green\users\dao\users {
+class users extends dao\users {
 
   public function getByConsoleCode( string $code) {
     if ( $code) {

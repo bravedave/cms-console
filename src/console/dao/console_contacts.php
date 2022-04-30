@@ -11,7 +11,7 @@
 namespace cms\console\dao;
 
 use cms\console\db;
-use dao\_dao;
+use dvc\dao\_dao;
 use green;
 use strings;
 use sys;

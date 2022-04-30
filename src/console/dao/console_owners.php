@@ -11,7 +11,7 @@
 namespace cms\console\dao;
 
 use cms\console\db;
-use dao\_dao;
+use dvc\dao\_dao;
 
 class console_owners extends _dao {
 	protected $_db_name = 'console_owners';
